@@ -36,7 +36,7 @@ MuseScore {
             var denominator = 4;
             theTimeSig.setSig(numerator, denominator);
             
-            var theKeySig = newElement(Element.KEYSIG);;
+            //var theKeySig = newElement(Element.KEYSIG);;
             //theKeySig.setKey(0); // Sets the key signature to C/Am
             
             pluginScore.addText("title", "==Random Harmonies Score's title==");
@@ -44,32 +44,47 @@ MuseScore {
             
             var pluginCursor = pluginScore.newCursor();
             pluginCursor.rewind(0); // rewind to the beginning of the score
-            int cursorMeasure = 0;
+            var cursorMeasure = 0;
             
             pluginCursor.add(theTimeSig);
-            //pluginCursor.add(theKeySig);
+            //pluginCursor.add(theKeySig); //Unfortunately, this doesn't work for some reason
             
-            var currentRest;
-            var xmlHarmonyIDsToAccept = [1, 2, 6, 16, 19, 64];
-            var beginTonalPitchClass_enum = 8;
-            var endTonalPitchClass_enum = 24;
+            //var noteNamesAll = [["Fbb", "Cbb","Gbb","Dbb","Abb","Ebb","Bbb"]
+            //                    ["Fb","Cb","Gb","Db","Ab","Eb","Bb"]
+            //                    ["F","C","G","D","A","E","B"]
+            //                    ["F#","C#","G#","D#","A#","E#","B#"]
+            //                    ["F##","C##","G##","D##","A##","E##","B##"]]; //tonalPitchClass (tpc).
+            //var noteNamesEasy = noteNamesAll [2];
+            var noteNamesEasy = ["F","C","G","D","A","E","B"];
+            //var noteNamesMedium = [noteNamesAll [1], noteNamesAll [2], noteNamesAll [3]]
+			
+            var chordExtensionsJazz = ["", "m", "o", "+", "sus4", "sus2",
+                                       "t7", "7", "+7", "t7+",
+                                       "-7", "-t7",
+                                       "7sus4", "7sus2"]
 
             console.log("Cursor at Measure:", cursorMeasure);
 
-            while (cursorMeasure < pluginScore.nmeasures){
-                  var pluginHarmony = newElement(Element.HARMONY);
+            var myBreak = newElement(Element.LAYOUT_BREAK);
+            myBreak.layoutBreakType = LayoutBreak.LINE;
 
-
-                  pluginHarmony: {
-                        id: xmlHarmonyIDsToAccept[Math.floor(Math.random() * xmlHarmonyIDsToAccept.size())];
-                        root: beginTonalPitchClass_enum + Math.floor(Math.random() * (endTonalPitchClass_enum - beginTonalPitchClass_enum));
-                  };
-
-                  if(cursor.isRest()){
-                        var rest = cursor.rest();
-                        rest.addHarmony(myHarmony);
+            while (cursorMeasure < nbOfMeasures){
+                  if (cursorMeasure % 4 === 3){
+                        pluginCursor.add(myBreak);
                   }
-                  console.log("Add harmony: " + myHarmony.root + myHarmony.id + " at measure: " + pluginCursor.measure);
+                  var pluginHarmony = newElement(Element.HARMONY);
+                  pluginHarmony.baseTpc = 14 + Math.floor(Math.random() * noteNamesEasy.length);
+                  //pluginHarmony.rootTpc = noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)];
+                  pluginHarmony.rootTpc = 14 + Math.floor(Math.random() * noteNamesEasy.length);
+                  //pluginHarmony.id = chordExtensionsJazz[Math.floor(Math.random() * chordExtensionsJazz.length)];
+                  pluginHarmony.id = Math.floor(Math.random() * 64);
+				  
+				  chordName = pluginHarmony.rootTpc + pluginHarmony.id + "/" + pluginHarmony.baseTpc;
+				  console.log("chord: " + chordName);
+				  pluginHarmony.text = chordName;
+				  
+                  pluginCursor.add(pluginHarmony);
+
                   pluginCursor.nextMeasure();
                   cursorMeasure ++;
             }
