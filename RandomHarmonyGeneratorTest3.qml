@@ -79,9 +79,9 @@ MuseScore {
                   //pluginHarmony.id = chordExtensionsJazz[Math.floor(Math.random() * chordExtensionsJazz.length)];
                   pluginHarmony.id = Math.floor(Math.random() * 64);
 				  
-				  chordName = pluginHarmony.rootTpc + pluginHarmony.id + "/" + pluginHarmony.baseTpc;
-				  console.log("chord: " + chordName);
-				  pluginHarmony.text = chordName;
+                  var chordName = noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)] + chordExtensionsJazz[Math.floor(Math.random() * chordExtensionsJazz.length)] + "/" + noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)];
+                  console.log("chord: " + chordName);
+                  pluginHarmony.text = chordName;
 				  
                   pluginCursor.add(pluginHarmony);
 
