@@ -73,14 +73,14 @@ MuseScore {
                         pluginCursor.add(myBreak);
                   }
                   var pluginHarmony = newElement(Element.HARMONY);
-                  pluginHarmony.baseTpc = 14 + Math.floor(Math.random() * noteNamesEasy.length);
+                  /*pluginHarmony.baseTpc = 14 + Math.floor(Math.random() * noteNamesEasy.length);
                   //pluginHarmony.rootTpc = noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)];
                   pluginHarmony.rootTpc = 14 + Math.floor(Math.random() * noteNamesEasy.length);
                   //pluginHarmony.id = chordExtensionsJazz[Math.floor(Math.random() * chordExtensionsJazz.length)];
-                  pluginHarmony.id = Math.floor(Math.random() * 64);
+                  pluginHarmony.id = Math.floor(Math.random() * 64);*/
 				  
                   var chordName = noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)] + chordExtensionsJazz[Math.floor(Math.random() * chordExtensionsJazz.length)] + "/" + noteNamesEasy[Math.floor(Math.random() * noteNamesEasy.length)];
-                  console.log("chord: " + chordName);
+                  console.log("New chord: " + chordName);
                   pluginHarmony.text = chordName;
 				  
                   pluginCursor.add(pluginHarmony);
