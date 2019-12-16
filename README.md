@@ -1,5 +1,4 @@
 RandomChordsSymbolGenerator
-https://github.com/Marr11317/MusescoreRandomChordSymbol
 ===================
 
 A plugin for MuseScore version 2.1 to create a new score with random chord symbols in it. You could follow the use of this plugin by this one :https://github.com/berteh/musescore-chordsToNotes (also here: https://musescore.org/en/node/62481). This would generate the chords symbols, then transform them into real chords (not symbols) playable by musescore.
